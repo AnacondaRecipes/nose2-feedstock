@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  skip: true  # [py<38]
+  skip: true
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
@@ -51,7 +51,7 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: license.txt
-  dev_url: https://docs.nose2.io/en/latest/
+  dev_url: https://github.com/nose-devs/nose2
   doc_url: https://docs.nose2.io/en/latest/
 
 extra:
