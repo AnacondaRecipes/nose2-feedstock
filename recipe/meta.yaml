@@ -11,18 +11,19 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  noarch: python
+  skip: true  # [py<38]
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - nose2 = nose2:discover
-    - nose2-3.6 = nose2:discover
+    - nose2-{{ python }} = nose2:discover
 
 requirements:
   host:
     - python
     - pip
     - setuptools
+    - wheel
   run:
     - python
     - six >=1.7
@@ -37,16 +38,21 @@ test:
     - nose2.tests.functional
     - nose2.tests.unit
     - nose2.tools
+  requires:
+    - pip
   commands:
+    - pip check
     - nose2 --help
-    - nose2-3.6 --help
-
+    - nose2-{{ python }} --help
 about:
   home: https://github.com/nose-devs/nose2
+  description: The successor to nose, based on unittest2
   summary: nose2 is the next generation of nicer testing for Python
-  license: BSD
+  license: BSD-3-Clause
   license_family: BSD
   license_file: license.txt
+  dev_url: https://docs.nose2.io/en/latest/
+  doc_url: https://docs.nose2.io/en/latest/
 
 extra:
   recipe-maintainers:
