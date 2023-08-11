@@ -1,6 +1,5 @@
 {% set name = "nose2" %}
 {% set version = "0.10.0" %}
-{% set sha256 = "886ba617a96de0130c54b24479bd5c2d74d5c940d40f3809c3a275511a0c4a60" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 886ba617a96de0130c54b24479bd5c2d74d5c940d40f3809c3a275511a0c4a60
 
 build:
   number: 0
