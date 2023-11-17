@@ -1,5 +1,5 @@
 {% set name = "nose2" %}
-{% set version = "0.13.0" %}
+{% set version = "0.14.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 57c68ad676ef4b88b50694937eb52f4943aa1ca261074b4909b6e163046b46f0
+  sha256: 5c28d770a0b9a702862bd6c3755ba2cd2f7994dd518c982e5ce298d7f37466a4
 
 build:
-  skip: true  # [py>=311]
+  skip: true  # [py<38]
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
@@ -45,11 +45,11 @@ about:
   home: https://github.com/nose-devs/nose2
   description: The successor to nose, based on unittest2
   summary: nose2 is the next generation of nicer testing for Python
-  license: BSD-3-Clause
+  license: BSD-2-Clause AND BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
   dev_url: https://github.com/nose-devs/nose2
-  doc_url: https://docs.nose2.io/en/latest/
+  doc_url: https://docs.nose2.io
 
 extra:
   recipe-maintainers:
