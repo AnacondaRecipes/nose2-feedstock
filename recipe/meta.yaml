@@ -1,5 +1,5 @@
 {% set name = "nose2" %}
-{% set version = "0.14.0" %}
+{% set version = "0.15.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,15 +7,15 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 5c28d770a0b9a702862bd6c3755ba2cd2f7994dd518c982e5ce298d7f37466a4
+  sha256: 36770f519df5becd3cbfe0bee4abbfbf9b9f6b4eb4e03361d282b7efcfc4f0df
 
 build:
-  skip: true  # [py<38]
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - nose2 = nose2:discover
     - nose2-{{ python }} = nose2:discover
+  skip: true  # [py<38]
 
 requirements:
   host:
@@ -26,21 +26,37 @@ requirements:
   run:
     - python
 
+# Unable to run tests, tox used.
+
 test:
   imports:
     - nose2
+    - nose2._toml
+    - nose2.events
+    - nose2.main
     - nose2.plugins
+    - nose2.plugins._constants
     - nose2.plugins.loader
+    - nose2.plugins.loader.discovery
+    - nose2.plugins.loader.eggdiscovery
+    - nose2.plugins.loader.testcases
+    - nose2.plugins.loader.testclasses
+    - nose2.plugins.mp
+    - nose2.suite
     - nose2.tests
-    - nose2.tests.functional
-    - nose2.tests.unit
+    - nose2.tests._common
     - nose2.tools
-  requires:
-    - pip
+    - nose2.tools.decorators
+    - nose2.tools.params
+    - nose2.util
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     - nose2 --help
     - nose2-{{ python }} --help
+  requires:
+    - pip
+
 about:
   home: https://github.com/nose-devs/nose2
   description: The successor to nose, based on unittest2
