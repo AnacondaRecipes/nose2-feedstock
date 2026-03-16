@@ -1,13 +1,13 @@
 {% set name = "nose2" %}
-{% set version = "0.15.1" %}
+{% set version = "0.16.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 36770f519df5becd3cbfe0bee4abbfbf9b9f6b4eb4e03361d282b7efcfc4f0df
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 19db5ad20e264501a8ee64e3e157a3766a5e744170e54ceecb4e5ca09b08655a
 
 build:
   number: 0
@@ -15,7 +15,7 @@ build:
   entry_points:
     - nose2 = nose2:discover
     - nose2-{{ python }} = nose2:discover
-  skip: true  # [py<38]
+  skip: true  # [py<39]
 
 requirements:
   host:
@@ -27,7 +27,6 @@ requirements:
     - python
 
 # Unable to run tests, tox used.
-
 test:
   imports:
     - nose2
